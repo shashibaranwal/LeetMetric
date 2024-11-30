@@ -60,7 +60,7 @@ h1{
     height: 120px;
     border-radius: 50%;
     position: relative;
-    border: 0.4rem solid #299f5d;
+    border: 0.4rem solid #299f8d;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -68,7 +68,7 @@ h1{
     font-size: 1rem;
     font-weight: 700;
     color: white;
-    background: conic-gradient(#299f5d var(--progress-degree, 0%), #283a2e 0%);
+    background: conic-gradient(#299f8d var(--progress-degree, 0%), #294843 0%);
 }
 
 .circle span{
