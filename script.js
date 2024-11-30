@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function () {
 
     const searchButton = document.getElementById("searchBtn");
     const usernameInput = document.getElementById("userInput");
@@ -11,25 +11,25 @@ document.addEventListener("DOMContentLoaded", function(){
     const hardLabel = document.getElementById("hard-label");
     const cardStatsContainer = document.querySelector(".stats-card");
 
-    
+
 
     // return true or false based on a regular expression (regex)
-    function validateUsername(username){
-        if(username.trim() === ""){
+    function validateUsername(username) {
+        if (username.trim() === "") {
             alert("Username should not be empty!");
             return false;
         }
         const regex = /^[a-zA-Z0-9_-]{1,15}$/;
         const isMatching = regex.test(username);
-        if(!isMatching){
+        if (!isMatching) {
             alert("Invalid username!");
         }
         return isMatching;
     }
 
-    async function fetchUserDetails(username){
+    async function fetchUserDetails(username) {
         // const url =`https://leetcode-stats-api.herokuapp.com/${username}`
-        try{
+        try {
             searchButton.textContent = "Searching...";
             searchButton.disabled = true;
 
@@ -41,8 +41,8 @@ document.addEventListener("DOMContentLoaded", function(){
             myHeaders.append("content-type", "application/json");
 
             const graphql = JSON.stringify({
-                query: "\n  query userSessionProgress($username: String!) {\n   allQuestionsCount {\n   difficulty\n    count\n     }\n     matchedUser(username : $username) {\n      submitStats {\n     acSubmissionNum {\n difficulty\n    count\n     submissions\n   }\n totalSubmissionNum {\n  difficulty\n    count\n     submissions\n   }\n     }\n     }\n  }", 
-                variables: {"username" : `${username}`}
+                query: "\n  query userSessionProgress($username: String!) {\n   allQuestionsCount {\n   difficulty\n    count\n     }\n     matchedUser(username : $username) {\n      submitStats {\n     acSubmissionNum {\n difficulty\n    count\n     submissions\n   }\n totalSubmissionNum {\n  difficulty\n    count\n     submissions\n   }\n     }\n     }\n  }",
+                variables: { "username": `${username}` }
 
             })
             const requestOptions = {
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function(){
             };
 
             const response = await fetch(proxyUrl + targetUrl, requestOptions)
-            if(!response.ok){
+            if (!response.ok) {
                 throw new Error("Unable to fetch the User Details");
             }
             const parsedData = await response.json();
@@ -61,10 +61,10 @@ document.addEventListener("DOMContentLoaded", function(){
 
             displayUserData(parsedData);
         }
-        catch(error){
+        catch (error) {
             statsContainer.innerHTML = `<p>${error.message}</p>`
         }
-        finally{
+        finally {
             searchButton.textContent = "Search";
             searchButton.disabled = false;
         }
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
     function upgradeProgress(solved, total, label, circle) {
-        const progressDegree = (solved/total)*100;
+        const progressDegree = (solved / total) * 100;
         circle.style.setProperty("--progress-degree", `${progressDegree}%`);
         label.textContent = `${solved}/${total}`;
     }
@@ -98,10 +98,10 @@ document.addEventListener("DOMContentLoaded", function(){
 
         // card Data
         const cardsData = [
-            {label: "Overall Submissions: ", value:parsedData.data.matchedUser.submitStats.totalSubmissionNum[0].submissions  },
-            {label: "Overall Easy Submissions: ", value:parsedData.data.matchedUser.submitStats.totalSubmissionNum[1].submissions  },
-            {label: "Overall Medium Submissions: ", value:parsedData.data.matchedUser.submitStats.totalSubmissionNum[2].submissions  },
-            {label: "Overall Hard Submissions: ", value:parsedData.data.matchedUser.submitStats.totalSubmissionNum[3].submissions  }
+            { label: "Overall Submissions: ", value: parsedData.data.matchedUser.submitStats.totalSubmissionNum[0].submissions },
+            { label: "Overall Easy Submissions: ", value: parsedData.data.matchedUser.submitStats.totalSubmissionNum[1].submissions },
+            { label: "Overall Medium Submissions: ", value: parsedData.data.matchedUser.submitStats.totalSubmissionNum[2].submissions },
+            { label: "Overall Hard Submissions: ", value: parsedData.data.matchedUser.submitStats.totalSubmissionNum[3].submissions }
         ];
 
         // console.log(cardData)
@@ -115,13 +115,13 @@ document.addEventListener("DOMContentLoaded", function(){
                     </div>
                 `
             }
-        )
+        ).join("")
     }
 
-    searchButton.addEventListener('click', function (){
+    searchButton.addEventListener('click', function () {
         const username = usernameInput.value;
         console.log("logging username: ", username);
-        if(validateUsername(username)){
+        if (validateUsername(username)) {
             // fetch data from API
             fetchUserDetails(username);
 
