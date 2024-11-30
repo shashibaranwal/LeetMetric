@@ -1,0 +1,87 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+body{
+    background-color: antiquewhite;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    background-color: aliceblue;
+    padding: 3rem;
+    border-radius: 0.2rem;
+    width: 50%;
+    max-width: 600px;
+}
+
+h1{
+    font-size: 2rem;
+}
+
+.userContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: start;
+}
+
+.userInputContainer{
+    display: flex;
+    justify-content: space-between;
+}
+
+#userInput{
+    width: 80%;
+    padding: 0.4rem;
+    border-radius: 0.2rem;
+}
+
+#searchBtn{
+    padding: 0.4rem;
+    border-radius: 0.2rem;
+}
+
+.circle{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    position: relative;
+    border: 0.4rem solid #299f5d;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+    background: conic-gradient(#299f5d var(--progress-degree, 0%), #283a2e 0%);
+}
+
+.circle span{
+    position: relative;
+    z-index: 2;
+}
+
+.progress{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+}
+
+.card{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
